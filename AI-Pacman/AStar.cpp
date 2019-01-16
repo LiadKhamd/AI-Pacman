@@ -2,7 +2,7 @@
 
 extern int maze[MSIZE][MSIZE];
 
-AStar::AStar(Point2D* pos)
+AStar::AStar(Point2D* &pos)
 {
 	this->last = NULL;
 	this->pos = pos;
@@ -20,6 +20,8 @@ int AStar::getColor(Point2D &point) {
 }
 
 bool AStar::run(Point2D targetPoint) {
+	if (getColor(targetPoint) == WALL)
+		return false;
 	if (last != NULL)
 	{
 		if (targetPoint == *last && *pos == lastPos)

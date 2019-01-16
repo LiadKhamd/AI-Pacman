@@ -11,7 +11,7 @@ const int H = 600; // window height
 int maze[MSIZE][MSIZE];
 bool done = false;
 const int NUMBER_OF_MONSTER = 2;
-const int NUMBER_OF_COINS = 2;
+const int NUMBER_OF_COINS = 3;
 
 Monster** monster;
 Pacman *pacman;
@@ -54,6 +54,7 @@ void clearMemory()
 	for (int i = 0; i < NUMBER_OF_COINS; i++)
 		delete coins[i];
 	delete[]coins;
+	delete pacman;
 }
 
 void Clean()
@@ -89,16 +90,19 @@ void init()
 	maze[pacmanPos->getY()][pacmanPos->getX()] = PACMAN;
 
 	monster = new Monster*[NUMBER_OF_MONSTER];
-	Point2D* pos;
+	Point2D** pos;
+	pos = new Point2D*[NUMBER_OF_MONSTER];
 	int x, y;
 	for (int i = 0; i < NUMBER_OF_MONSTER; i++)
 	{
 		x = rand() % MSIZE;
 		y = rand() % MSIZE;
-		pos = new Point2D(x, y);
-		monster[i] = new Monster(pos, pacmanPos);
+		pos[i] = new Point2D(x, y);
+		monster[i] = new Monster(pos[i], pacmanPos);
 		maze[y][x] = MONSTER;
 	}
+	pacman->setMonsters(NUMBER_OF_MONSTER, pos);
+	delete[] pos;
 
 	coins = new Point2D*[NUMBER_OF_COINS];
 	for (int i = 0; i < NUMBER_OF_COINS; i++)
@@ -138,6 +142,12 @@ void DrawMaze()
 				break;
 			case COIN:
 				glColor3d(0.5, 1, 0); //GREENISH YELLOW;
+				break;
+			case PACMAN_DIE:
+				glColor3d(0.737255, 0.560784, 0.560784); //PINK;
+				break;
+			case PACMAN_WIN:
+				glColor3d(1, 0.5, 0); //ORANGE;
 				break;
 			}
 			// draw square

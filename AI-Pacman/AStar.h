@@ -10,7 +10,7 @@
 class AStar
 {
 public:
-	AStar(Point2D *pos);
+	AStar(Point2D* &pos);
 	~AStar();
 	bool run(Point2D targetPoint);
 	Point2D* getTop();
