@@ -12,7 +12,7 @@ class AStar
 public:
 	AStar(Point2D* &pos);
 	~AStar();
-	bool run(Point2D targetPoint);
+	bool run(Point2D targetPoint, int maxG = -1);
 	Point2D* getTop();
 	int getLen();
 private:

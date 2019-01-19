@@ -19,8 +19,8 @@ int AStar::getColor(Point2D &point) {
 	return maze[point.getY()][point.getX()];
 }
 
-bool AStar::run(Point2D targetPoint) {
-	if (getColor(targetPoint) == WALL)
+bool AStar::run(Point2D targetPoint, int maxG) {
+	if (maxG == -1 && getColor(targetPoint) == WALL)
 		return false;
 	if (last != NULL)
 	{
@@ -51,7 +51,7 @@ bool AStar::run(Point2D targetPoint) {
 		black.push_back(bestPoint);
 		bestPointAsParent = new Point2D_hg(bestPoint);
 		bestPointPos = bestPointAsParent->getPoint();
-		if (bestPointPos == targetPoint) {
+		if (bestPointPos == targetPoint || maxG == bestPoint.getG()) {
 			while (bestPointAsParent->getParent() != NULL)
 			{
 				solution.push_back(*bestPointAsParent);

@@ -76,15 +76,17 @@ void Pacman::run() {
 				}
 				numberOfUse = USE_TIME;
 				newFromMonsterPoint(monsters.at(monsterIndex));
-				lastPosRunMonster = new Point2D(*pos);
 			}
 			if (runFromMonster())
 				numberOfUse--;
 			else
 				numberOfUse = 0;
+			lastPosRunMonster = new Point2D(*pos);
 		}
 		else
+		{
 			searchCoins();
+		}
 		(maze)[pos->getY()][pos->getX()] = PACMAN;
 	}
 	if (win)
@@ -113,13 +115,15 @@ void Pacman::newFromMonsterPoint(Point2D* &monster)
 	int mX, mY;
 	mX = monster->getX();
 	mY = monster->getY();
-	Point2D pos = Point2D(0,0);
-	int count = 1;
-	do
-	{
-		pos = Point2D(MSIZE - mX + count, MSIZE - mY + count);
-		count++;
-	} while (!runMonster->run(pos) && !done);
+	int posX, posY;
+	posX = pos->getX() - mX;
+	if (posX != 0)
+		posX = posX / abs(posX);
+	posY = pos->getY() - mY;
+	if (posY != 0)
+		posY = posY / abs(posY);
+	Point2D pos = Point2D((MSIZE - mX + posX * 10) % MSIZE, (MSIZE - mY + posY * 10) % MSIZE);
+	runMonster->run(pos, RUN);
 }
 
 void Pacman::searchCoins()

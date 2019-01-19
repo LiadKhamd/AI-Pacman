@@ -10,7 +10,7 @@ const int H = 600; // window height
 
 int maze[MSIZE][MSIZE];
 bool done = false;
-const int NUMBER_OF_MONSTER = 2;
+const int NUMBER_OF_MONSTER = 3;
 const int NUMBER_OF_COINS = 3;
 
 Monster** monster;

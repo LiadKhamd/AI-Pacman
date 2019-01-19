@@ -16,5 +16,5 @@ const double SQSIZE = 2.0 / MSIZE;
 const long MONSTER_SLEEP = 150000;
 const long PACMAN_SLEEP = 80000;
 
-const int USE_TIME = 10;
-const int RUN = 5;
+const int USE_TIME = 20;
+const int RUN = 15;

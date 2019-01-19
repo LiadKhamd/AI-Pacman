@@ -22,7 +22,7 @@ void Monster::run() {
 	Point2D* helper = NULL;
 	while (!done)
 	{
-		if (aStar->run(*pacMan)) {
+		if (aStar->run(*pacMan,-1)) {
 			delete helper;
 			helper = aStar->getTop();
 			if (helper != NULL && !(*helper == *pacMan)) {
