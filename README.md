@@ -1,2 +1,2 @@
 # AI-Pacman
-Pacman game - AI paman vs AI monster
+Multi-threading Pacman game - AI paman vs AI monster
